@@ -2,15 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For You</title>
+<title>From Lokesh</title>
+
+<!-- Romantic Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
 body {
   margin: 0;
-  font-family: 'Georgia', serif;
+  font-family: 'Playfair Display', serif;
   height: 100vh;
+  background: linear-gradient(135deg, #ffd1dc, #ffb6c1);
   overflow: hidden;
-  background: pink;
 }
 
 .page-bg {
@@ -18,7 +21,6 @@ body {
   inset: 0;
   background-size: cover;
   background-position: center;
-  transition: opacity 1.5s ease;
   z-index: -1;
 }
 
@@ -30,119 +32,176 @@ body {
 }
 
 .card {
-  background: rgba(255,255,255,0.88);
-  padding: 40px;
+  background: rgba(255,255,255,0.92);
+  padding: 35px;
   max-width: 650px;
-  border-radius: 20px;
+  max-height: 85vh;
+  overflow-y: auto;
+  border-radius: 22px;
   text-align: center;
-  animation: fade 1.5s ease;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  animation: fadeIn 1.8s ease;
 }
 
-@keyframes fade {
-  from { opacity: 0; transform: translateY(20px); }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(25px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 42px;
+  color: #c2185b;
+  margin-bottom: 15px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.7;
+  color: #5a0033;
+  white-space: pre-line;
 }
 
 img {
   max-width: 100%;
-  border-radius: 15px;
+  max-height: 40vh;
+  border-radius: 16px;
   margin-top: 20px;
+  object-fit: contain;
 }
 
 button {
-  padding: 12px 28px;
+  padding: 12px 30px;
   border: none;
-  border-radius: 25px;
-  margin: 15px;
+  border-radius: 30px;
+  margin-top: 20px;
   font-size: 16px;
   cursor: pointer;
+  background: #ff4f9a;
+  color: white;
 }
 
-.yes { background: #ff4f9a; color: white; }
-.no  { background: gray; color: white; position: absolute; }
+.no {
+  background: #999;
+  position: absolute;
+  display: none;
+}
 
-.hidden-name {
-  opacity: 0.25;
-  font-size: 12px;
-  margin-top: 10px;
+.signature {
+  margin-top: 18px;
+  font-size: 14px;
+  opacity: 0.6;
 }
 </style>
 </head>
 
 <body>
 
-<audio autoplay loop>
+<!-- Music -->
+<audio id="bgm" loop>
   <source src="music/soft.mp3" type="audio/mpeg">
 </audio>
 
-<div id="bg" class="page-bg"></div>
+<div class="page-bg" id="bg"></div>
 
 <div class="container">
-  <div class="card">
-    <h2 id="title"></h2>
-    <p id="text"></p>
-    <img id="img" style="display:none;">
-    <div class="hidden-name">s o u n d a r y a</div>
+  <div class="card" id="card">
+    <h1 id="title">For You</h1>
+    <p id="text">
+I’m writing this from miles away,
+from a place that doesn’t feel like home
+because you’re not here.
 
-    <button class="yes" onclick="next()">Next</button>
-    <button id="no" class="no" onclick="run()">No</button>
+Being overseas taught me something —
+distance doesn’t reduce love,
+it reveals it.
+
+I miss you in the quiet moments,
+in the loud ones,
+and in the spaces between.
+
+My cute little angryyyy bird…
+even if life never lets us walk together,
+you will still be my last two heartbeats
+until my very last breath.
+    </p>
+
+    <img id="img" style="display:none;">
+
+    <div class="signature">— Lokesh Goud</div>
+
+    <button onclick="nextPage()">Next</button>
+    <button class="no" id="no" onclick="runAway()">No</button>
   </div>
 </div>
 
 <script>
-let page = 0;
+let page = 1;
 const bg = document.getElementById("bg");
 const title = document.getElementById("title");
 const text = document.getElementById("text");
 const img = document.getElementById("img");
+const music = document.getElementById("bgm");
 const no = document.getElementById("no");
 
-function next() {
+bg.style.backgroundImage = "url('images/s-love.png')";
+
+function nextPage() {
+  music.play();
+
   page++;
   img.style.display = "none";
-
-  if (page === 1) {
-    bg.style.backgroundImage = "url('images/s-love.png')";
-    title.innerText = "This begins with you";
-    text.innerText = "Before words… before reasons… there was always you.";
-  }
+  no.style.display = "none";
 
   if (page === 2) {
-    bg.style.backgroundImage = "linear-gradient(#ffb6c1,#ffc0cb)";
     img.src = "images/cafe.png";
     img.style.display = "block";
-    title.innerText = "Love shows itself quietly";
-    text.innerText = "Not when it’s easy. Not in front of others. But in staying.";
+    title.innerText = "Love is proven";
+    text.innerText =
+      "Not in front of friends.\nNot when it’s easy.\nBut when staying costs something.";
   }
 
-  if (page === 3) {
+  else if (page === 3) {
     img.src = "images/couple.png";
-    title.innerText = "In the way I looked at you";
-    text.innerText = "When no one else was watching, my heart already knew.";
+    img.style.display = "block";
+    title.innerText = "In the quiet looks";
+    text.innerText =
+      "In the way I looked at you\nwhen no one else was watching,\nmy heart already knew.";
   }
 
-  if (page === 4) {
+  else if (page === 4) {
     img.src = "images/card.png";
+    img.style.display = "block";
     title.innerText = "I chose you";
-    text.innerText = "I skipped many paths, because my heart never wandered.";
+    text.innerText =
+      "I skipped paths.\nI ignored chances.\nBecause my heart never wandered.";
   }
 
-  if (page === 5) {
+  else if (page === 5) {
     img.src = "images/rose.png";
+    img.style.display = "block";
     title.innerText = "Right person, wrong time";
     text.innerText =
       "Family. Circumstances. Life.\nI walked away, not because I stopped loving.";
   }
 
-  if (page === 6) {
+  else if (page === 6) {
     img.src = "images/snow.png";
-    title.innerText = "Even if not forever together";
+    img.style.display = "block";
+    title.innerText = "Always you";
     text.innerText =
-      "You will be my last two heartbeats until my final breath.";
+      "Even if forever isn’t ours,\nmy heart will always recognize yours.";
+    no.style.display = "block";
   }
 }
 
-function run() {
+function runAway() {
   no.style.top = Math.random() * 80 + "%";
   no.style.left = Math.random() * 80 + "%";
 }
