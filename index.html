@@ -21,7 +21,6 @@ body {
   inset: 0;
   background-size: cover;
   background-position: center;
-  transition: opacity 1.5s ease;
   z-index: -3;
 }
 
@@ -58,14 +57,13 @@ body {
 
 h2 {
   font-family: 'Allura', cursive;
-  font-size: 52px;
+  font-size: 54px;
   color: #e63982;
-  margin-bottom: 20px;
 }
 
 p {
   font-size: 19px;
-  line-height: 1.8;
+  line-height: 1.85;
   white-space: pre-line;
 }
 
@@ -75,38 +73,42 @@ p {
 }
 
 @keyframes glow {
-  0% { text-shadow: 0 0 5px #ff9acb; }
+  0% { text-shadow: 0 0 6px #ff9acb; }
   50% { text-shadow: 0 0 18px #ff4f9a; }
-  100% { text-shadow: 0 0 5px #ff9acb; }
+  100% { text-shadow: 0 0 6px #ff9acb; }
+}
+
+/* Telugu glow */
+.telugu-glow {
+  color: #c4006f;
+  animation: teluguGlow 2.2s infinite;
+}
+
+@keyframes teluguGlow {
+  0% { text-shadow: 0 0 6px #ff9acb; }
+  50% { text-shadow: 0 0 26px #ff5fa2, 0 0 40px #ff8dc7; }
+  100% { text-shadow: 0 0 6px #ff9acb; }
 }
 
 img {
   max-width: 100%;
   max-height: 40vh;
   object-fit: contain;
-  border-radius: 20px;
+  border-radius: 22px;
   margin-top: 25px;
 }
 
 button {
-  padding: 16px 36px;
+  padding: 16px 38px;
   border: none;
   border-radius: 40px;
-  margin: 20px;
+  margin: 22px;
   font-size: 17px;
   cursor: pointer;
 }
 
-.yes {
-  background: #ff4f9a;
-  color: white;
-}
-
-.no {
-  background: #aaa;
-  color: white;
-  position: absolute;
-}
+.yes { background: #ff4f9a; color: white; }
+.no  { background: #aaa; color: white; position: absolute; }
 
 .no::after {
   content: "Aseyyyyy YESSS for meee 😭\A Yes is what I need as you 💔";
@@ -123,7 +125,7 @@ button {
   color: #b3005e;
 }
 
-/* Snow + Love + Rose */
+/* Falling elements */
 .fall {
   position: fixed;
   top: -10px;
@@ -169,10 +171,17 @@ const img = document.getElementById("img");
 const no = document.getElementById("no");
 const music = document.getElementById("music");
 
-function typeWriter(message, i = 0) {
-  if (i < message.length) {
-    text.innerHTML += message.charAt(i);
-    setTimeout(() => typeWriter(message, i + 1), 35);
+function typeWriter(msg, i = 0) {
+  if (i < msg.length) {
+    text.innerHTML += msg.charAt(i);
+    setTimeout(() => typeWriter(msg, i + 1), 35);
+  }
+}
+
+function teluguTypeWriter(el, msg, i = 0) {
+  if (i < msg.length) {
+    el.innerHTML += msg.charAt(i);
+    setTimeout(() => teluguTypeWriter(el, msg, i + 1), 55);
   }
 }
 
@@ -225,31 +234,33 @@ function next() {
     img.src = "images/snow.png";
     img.style.display = "block";
     title.innerText = "A lifetime apology";
-    text.innerText =
+
+    text.innerHTML =
 `The universe for me shown right person at the wrong time on purpose.
 Not to torture you but to show you whats possible love is,
-to give you a glimpse of the love deserve before you're ready to hold it.
-
-You will receive the greatest one in future,
-mine is little as me.
+to give you a glimpse of the love deserve before you're ready to hold it you will receive the greatest one in future mine is little as me.
 
 I think we meet too early when you are still healing from someone else loss.
 I might be different city not close but I still hurt you.
 
 In this time what we behave is what we will become in future.
 Because you feel I feel it.
-Naku nuvvu neku nenu but not long enough.
+
+<span id="telugu-line" class="telugu-glow"></span> but not long enough.
 
 Time is sending us more further awayyy.
 Maybe next time we will meet at the correct time.
 
-Meeting you Soundaryaaa,
+Meeting you <span class="telugu-glow">Soundaryaaa</span>,
 is not a mistake of time.
 It is a preparation.
 When time aligned you will get what you need.
 Everything have a plan.
 
 I am sorry… for a lifetime.`;
+
+    const teluguEl = document.getElementById("telugu-line");
+    teluguTypeWriter(teluguEl, "Naku nuvvu neku nenu");
 
     no.remove();
     startFall();
