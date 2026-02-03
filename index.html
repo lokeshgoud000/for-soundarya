@@ -4,13 +4,14 @@
 <meta charset="UTF-8">
 <title>For Soundaryaaa</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
 
 <style>
 body {
   margin: 0;
   height: 100vh;
   font-family: 'Playfair Display', serif;
+  font-style: italic;
   background: #ffd6e7;
   overflow: hidden;
 }
@@ -21,7 +22,7 @@ body {
   background-size: cover;
   background-position: center;
   transition: opacity 1.5s ease;
-  z-index: -2;
+  z-index: -3;
 }
 
 .container {
@@ -32,86 +33,101 @@ body {
 }
 
 .card {
-  background: rgba(255,255,255,0.9);
-  padding: 40px;
-  max-width: 720px;
-  max-height: 85vh;
+  background: rgba(255,255,255,0.93);
+  padding: 70px;
+  max-width: 920px;
+  max-height: 90vh;
   overflow-y: auto;
-  border-radius: 25px;
+  border-radius: 35px;
   text-align: center;
-  animation: fade 1.5s ease;
+  animation: fade 1.5s ease, heartbeat 1.6s infinite;
 }
 
 @keyframes fade {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(25px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.03); }
+  40% { transform: scale(1); }
+  60% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+h2 {
+  font-family: 'Allura', cursive;
+  font-size: 52px;
+  color: #e63982;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 19px;
+  line-height: 1.8;
+  white-space: pre-line;
+}
+
+.glow {
+  color: #d1006c;
+  animation: glow 2s infinite;
+}
+
+@keyframes glow {
+  0% { text-shadow: 0 0 5px #ff9acb; }
+  50% { text-shadow: 0 0 18px #ff4f9a; }
+  100% { text-shadow: 0 0 5px #ff9acb; }
 }
 
 img {
   max-width: 100%;
   max-height: 40vh;
   object-fit: contain;
-  border-radius: 18px;
-  margin-top: 20px;
-}
-
-h2 {
-  font-family: 'Dancing Script', cursive;
-  font-size: 42px;
-  color: #e63982;
-}
-
-p {
-  font-size: 18px;
-  line-height: 1.7;
-  white-space: pre-line;
+  border-radius: 20px;
+  margin-top: 25px;
 }
 
 button {
-  padding: 14px 30px;
+  padding: 16px 36px;
   border: none;
-  border-radius: 30px;
-  margin: 15px;
-  font-size: 16px;
+  border-radius: 40px;
+  margin: 20px;
+  font-size: 17px;
   cursor: pointer;
 }
 
-.yes { background: #ff4f9a; color: white; }
-.no  { background: #999; color: white; position: absolute; }
+.yes {
+  background: #ff4f9a;
+  color: white;
+}
+
+.no {
+  background: #aaa;
+  color: white;
+  position: absolute;
+}
 
 .no::after {
-  content: "Aseyyyyyy Yesss for meee 😭\A Yes is what I need as you 💔";
+  content: "Aseyyyyy YESSS for meee 😭\A Yes is what I need as you 💔";
   white-space: pre;
   display: block;
   font-size: 12px;
-  margin-top: 5px;
+  margin-top: 6px;
 }
 
 .signature {
-  margin-top: 20px;
-  font-family: 'Dancing Script', cursive;
-  font-size: 22px;
+  margin-top: 30px;
+  font-family: 'Allura', cursive;
+  font-size: 28px;
   color: #b3005e;
 }
 
-.heartbeat {
-  animation: beat 1.4s infinite;
-}
-
-@keyframes beat {
-  0% { transform: scale(1); }
-  25% { transform: scale(1.05); }
-  40% { transform: scale(1); }
-  60% { transform: scale(1.08); }
-  100% { transform: scale(1); }
-}
-
-/* Snow */
-.snow {
+/* Snow + Love + Rose */
+.fall {
   position: fixed;
   top: -10px;
-  color: white;
-  font-size: 16px;
+  font-size: 18px;
   animation: fall linear infinite;
   z-index: 5;
 }
@@ -131,7 +147,7 @@ button {
 <div id="bg" class="page-bg"></div>
 
 <div class="container">
-  <div class="card heartbeat">
+  <div class="card">
     <h2 id="title"></h2>
     <p id="text"></p>
     <img id="img" style="display:none;">
@@ -144,6 +160,8 @@ button {
 
 <script>
 let page = 0;
+let cameFromNo = false;
+
 const bg = document.getElementById("bg");
 const title = document.getElementById("title");
 const text = document.getElementById("text");
@@ -164,23 +182,28 @@ function next() {
   text.innerHTML = "";
 
   if (page === 1) {
-    music.play();
+    if (!cameFromNo) music.play();
     bg.style.backgroundImage = "url('images/s-love.png')";
     title.innerText = "From across the oceans…";
-    typeWriter("Missing you from overseas isn’t just distance.\nIt’s waking up every night with your name in my chest.\nMy cute little angryyyy bird…\nMy last two heartbeats.");
+    typeWriter(
+      "Missing you from overseas isn’t just distance.\n" +
+      "It’s waking up every night with your name in my chest.\n\n" +
+      "<span class='glow'>My cute little angryyyy bird…</span>\n" +
+      "<span class='glow'>My last two heartbeats.</span>"
+    );
   }
 
   if (page === 2) {
     img.src = "images/cafe.png";
     img.style.display = "block";
     title.innerText = "Love stays quietly";
-    text.innerText = "Not in front of others.\nNot when it’s easy.\nBut when staying costs everything.";
+    text.innerText = "Not when it’s easy.\nNot in front of others.\nBut when staying costs everything.";
   }
 
   if (page === 3) {
     img.src = "images/couple.png";
     img.style.display = "block";
-    title.innerText = "In silent moments";
+    title.innerText = "Silent moments";
     text.innerText = "In the way I looked at you when no one else was watching.";
   }
 
@@ -229,23 +252,49 @@ Everything have a plan.
 I am sorry… for a lifetime.`;
 
     no.remove();
-    startSnow();
+    startFall();
   }
 }
 
 function run() {
-  no.style.top = Math.random() * 80 + "%";
-  no.style.left = Math.random() * 80 + "%";
+  cameFromNo = true;
+  page = -1;
+  showNoPage();
 }
 
-function startSnow() {
-  for (let i = 0; i < 50; i++) {
-    const snow = document.createElement("div");
-    snow.className = "snow";
-    snow.innerText = "❄";
-    snow.style.left = Math.random() * 100 + "vw";
-    snow.style.animationDuration = 5 + Math.random() * 5 + "s";
-    document.body.appendChild(snow);
+function showNoPage() {
+  bg.style.backgroundImage = "linear-gradient(#ffd1dc,#ffe6ef)";
+  img.style.display = "none";
+  title.innerText = "Oopsss… No? 😢";
+  text.innerText =
+"Aseyyyyy YESSS… no chance of saying No to me 💔❤️\nYou alreadyyyy fallen…";
+
+  music.pause();
+  music.currentTime = 0;
+
+  document.querySelector(".yes").innerText = "Back";
+  document.querySelector(".yes").onclick = backToStart;
+  no.style.display = "none";
+}
+
+function backToStart() {
+  page = 0;
+  cameFromNo = false;
+  document.querySelector(".yes").innerText = "Next";
+  document.querySelector(".yes").onclick = next;
+  no.style.display = "inline-block";
+  next();
+}
+
+function startFall() {
+  const icons = ["❄","❤️","🌹"];
+  for (let i = 0; i < 60; i++) {
+    const el = document.createElement("div");
+    el.className = "fall";
+    el.innerText = icons[Math.floor(Math.random()*icons.length)];
+    el.style.left = Math.random()*100+"vw";
+    el.style.animationDuration = 5+Math.random()*5+"s";
+    document.body.appendChild(el);
   }
 }
 </script>
