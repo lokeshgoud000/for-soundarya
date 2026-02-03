@@ -2,17 +2,16 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>From Lokesh</title>
+<title>For Soundaryaaa</title>
 
-<!-- Romantic Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
 
 <style>
 body {
   margin: 0;
-  font-family: 'Playfair Display', serif;
   height: 100vh;
-  background: linear-gradient(135deg, #ffd1dc, #ffb6c1);
+  font-family: 'Playfair Display', serif;
+  background: #ffd6e7;
   overflow: hidden;
 }
 
@@ -21,7 +20,8 @@ body {
   inset: 0;
   background-size: cover;
   background-position: center;
-  z-index: -1;
+  transition: opacity 1.5s ease;
+  z-index: -2;
 }
 
 .container {
@@ -32,178 +32,221 @@ body {
 }
 
 .card {
-  background: rgba(255,255,255,0.92);
-  padding: 35px;
-  max-width: 650px;
+  background: rgba(255,255,255,0.9);
+  padding: 40px;
+  max-width: 720px;
   max-height: 85vh;
   overflow-y: auto;
-  border-radius: 22px;
+  border-radius: 25px;
   text-align: center;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-  animation: fadeIn 1.8s ease;
+  animation: fade 1.5s ease;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(25px); }
+@keyframes fade {
+  from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-h1 {
-  font-family: 'Great Vibes', cursive;
-  font-size: 42px;
-  color: #c2185b;
-  margin-bottom: 15px;
-  animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
-
-p {
-  font-size: 18px;
-  line-height: 1.7;
-  color: #5a0033;
-  white-space: pre-line;
 }
 
 img {
   max-width: 100%;
   max-height: 40vh;
-  border-radius: 16px;
-  margin-top: 20px;
   object-fit: contain;
+  border-radius: 18px;
+  margin-top: 20px;
+}
+
+h2 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 42px;
+  color: #e63982;
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.7;
+  white-space: pre-line;
 }
 
 button {
-  padding: 12px 30px;
+  padding: 14px 30px;
   border: none;
   border-radius: 30px;
-  margin-top: 20px;
+  margin: 15px;
   font-size: 16px;
   cursor: pointer;
-  background: #ff4f9a;
-  color: white;
 }
 
-.no {
-  background: #999;
-  position: absolute;
-  display: none;
+.yes { background: #ff4f9a; color: white; }
+.no  { background: #999; color: white; position: absolute; }
+
+.no::after {
+  content: "Aseyyyyyy Yesss for meee 😭\A Yes is what I need as you 💔";
+  white-space: pre;
+  display: block;
+  font-size: 12px;
+  margin-top: 5px;
 }
 
 .signature {
-  margin-top: 18px;
-  font-size: 14px;
-  opacity: 0.6;
+  margin-top: 20px;
+  font-family: 'Dancing Script', cursive;
+  font-size: 22px;
+  color: #b3005e;
+}
+
+.heartbeat {
+  animation: beat 1.4s infinite;
+}
+
+@keyframes beat {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.05); }
+  40% { transform: scale(1); }
+  60% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+/* Snow */
+.snow {
+  position: fixed;
+  top: -10px;
+  color: white;
+  font-size: 16px;
+  animation: fall linear infinite;
+  z-index: 5;
+}
+
+@keyframes fall {
+  to { transform: translateY(110vh); }
 }
 </style>
 </head>
 
 <body>
 
-<!-- Music -->
-<audio id="bgm" loop>
+<audio id="music" loop>
   <source src="music/soft.mp3" type="audio/mpeg">
 </audio>
 
-<div class="page-bg" id="bg"></div>
+<div id="bg" class="page-bg"></div>
 
 <div class="container">
-  <div class="card" id="card">
-    <h1 id="title">For You</h1>
-    <p id="text">
-I’m writing this from miles away,
-from a place that doesn’t feel like home
-because you’re not here.
-
-Being overseas taught me something —
-distance doesn’t reduce love,
-it reveals it.
-
-I miss you in the quiet moments,
-in the loud ones,
-and in the spaces between.
-
-My cute little angryyyy bird…
-even if life never lets us walk together,
-you will still be my last two heartbeats
-until my very last breath.
-    </p>
-
+  <div class="card heartbeat">
+    <h2 id="title"></h2>
+    <p id="text"></p>
     <img id="img" style="display:none;">
+    <div class="signature">— Lokeshhh for Soundaryaaa</div>
 
-    <div class="signature">— Lokesh Goud</div>
-
-    <button onclick="nextPage()">Next</button>
-    <button class="no" id="no" onclick="runAway()">No</button>
+    <button class="yes" onclick="next()">Next</button>
+    <button id="no" class="no" onclick="run()">No</button>
   </div>
 </div>
 
 <script>
-let page = 1;
+let page = 0;
 const bg = document.getElementById("bg");
 const title = document.getElementById("title");
 const text = document.getElementById("text");
 const img = document.getElementById("img");
-const music = document.getElementById("bgm");
 const no = document.getElementById("no");
+const music = document.getElementById("music");
 
-bg.style.backgroundImage = "url('images/s-love.png')";
+function typeWriter(message, i = 0) {
+  if (i < message.length) {
+    text.innerHTML += message.charAt(i);
+    setTimeout(() => typeWriter(message, i + 1), 35);
+  }
+}
 
-function nextPage() {
-  music.play();
-
+function next() {
   page++;
   img.style.display = "none";
-  no.style.display = "none";
+  text.innerHTML = "";
+
+  if (page === 1) {
+    music.play();
+    bg.style.backgroundImage = "url('images/s-love.png')";
+    title.innerText = "From across the oceans…";
+    typeWriter("Missing you from overseas isn’t just distance.\nIt’s waking up every night with your name in my chest.\nMy cute little angryyyy bird…\nMy last two heartbeats.");
+  }
 
   if (page === 2) {
     img.src = "images/cafe.png";
     img.style.display = "block";
-    title.innerText = "Love is proven";
-    text.innerText =
-      "Not in front of friends.\nNot when it’s easy.\nBut when staying costs something.";
+    title.innerText = "Love stays quietly";
+    text.innerText = "Not in front of others.\nNot when it’s easy.\nBut when staying costs everything.";
   }
 
-  else if (page === 3) {
+  if (page === 3) {
     img.src = "images/couple.png";
     img.style.display = "block";
-    title.innerText = "In the quiet looks";
-    text.innerText =
-      "In the way I looked at you\nwhen no one else was watching,\nmy heart already knew.";
+    title.innerText = "In silent moments";
+    text.innerText = "In the way I looked at you when no one else was watching.";
   }
 
-  else if (page === 4) {
+  if (page === 4) {
     img.src = "images/card.png";
     img.style.display = "block";
     title.innerText = "I chose you";
-    text.innerText =
-      "I skipped paths.\nI ignored chances.\nBecause my heart never wandered.";
+    text.innerText = "I skipped many paths.\nMy heart never wandered.";
   }
 
-  else if (page === 5) {
+  if (page === 5) {
     img.src = "images/rose.png";
     img.style.display = "block";
-    title.innerText = "Right person, wrong time";
-    text.innerText =
-      "Family. Circumstances. Life.\nI walked away, not because I stopped loving.";
+    title.innerText = "Right person… wrong time";
+    text.innerText = "I walked away not because I stopped loving.\nBut because life demanded sacrifices.";
   }
 
-  else if (page === 6) {
+  if (page === 6) {
     img.src = "images/snow.png";
     img.style.display = "block";
-    title.innerText = "Always you";
+    title.innerText = "A lifetime apology";
     text.innerText =
-      "Even if forever isn’t ours,\nmy heart will always recognize yours.";
-    no.style.display = "block";
+`The universe for me shown right person at the wrong time on purpose.
+Not to torture you but to show you whats possible love is,
+to give you a glimpse of the love deserve before you're ready to hold it.
+
+You will receive the greatest one in future,
+mine is little as me.
+
+I think we meet too early when you are still healing from someone else loss.
+I might be different city not close but I still hurt you.
+
+In this time what we behave is what we will become in future.
+Because you feel I feel it.
+Naku nuvvu neku nenu but not long enough.
+
+Time is sending us more further awayyy.
+Maybe next time we will meet at the correct time.
+
+Meeting you Soundaryaaa,
+is not a mistake of time.
+It is a preparation.
+When time aligned you will get what you need.
+Everything have a plan.
+
+I am sorry… for a lifetime.`;
+
+    no.remove();
+    startSnow();
   }
 }
 
-function runAway() {
+function run() {
   no.style.top = Math.random() * 80 + "%";
   no.style.left = Math.random() * 80 + "%";
+}
+
+function startSnow() {
+  for (let i = 0; i < 50; i++) {
+    const snow = document.createElement("div");
+    snow.className = "snow";
+    snow.innerText = "❄";
+    snow.style.left = Math.random() * 100 + "vw";
+    snow.style.animationDuration = 5 + Math.random() * 5 + "s";
+    document.body.appendChild(snow);
+  }
 }
 </script>
 
