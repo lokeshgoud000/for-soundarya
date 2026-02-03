@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For You</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Georgia', serif;
+  height: 100vh;
+  overflow: hidden;
+  background: pink;
+}
+
+.page-bg {
+  position: fixed;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: opacity 1.5s ease;
+  z-index: -1;
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  background: rgba(255,255,255,0.88);
+  padding: 40px;
+  max-width: 650px;
+  border-radius: 20px;
+  text-align: center;
+  animation: fade 1.5s ease;
+}
+
+@keyframes fade {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+img {
+  max-width: 100%;
+  border-radius: 15px;
+  margin-top: 20px;
+}
+
+button {
+  padding: 12px 28px;
+  border: none;
+  border-radius: 25px;
+  margin: 15px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.yes { background: #ff4f9a; color: white; }
+.no  { background: gray; color: white; position: absolute; }
+
+.hidden-name {
+  opacity: 0.25;
+  font-size: 12px;
+  margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<audio autoplay loop>
+  <source src="music/soft.mp3" type="audio/mpeg">
+</audio>
+
+<div id="bg" class="page-bg"></div>
+
+<div class="container">
+  <div class="card">
+    <h2 id="title"></h2>
+    <p id="text"></p>
+    <img id="img" style="display:none;">
+    <div class="hidden-name">s o u n d a r y a</div>
+
+    <button class="yes" onclick="next()">Next</button>
+    <button id="no" class="no" onclick="run()">No</button>
+  </div>
+</div>
+
+<script>
+let page = 0;
+const bg = document.getElementById("bg");
+const title = document.getElementById("title");
+const text = document.getElementById("text");
+const img = document.getElementById("img");
+const no = document.getElementById("no");
+
+function next() {
+  page++;
+  img.style.display = "none";
+
+  if (page === 1) {
+    bg.style.backgroundImage = "url('images/s-love.png')";
+    title.innerText = "This begins with you";
+    text.innerText = "Before words… before reasons… there was always you.";
+  }
+
+  if (page === 2) {
+    bg.style.backgroundImage = "linear-gradient(#ffb6c1,#ffc0cb)";
+    img.src = "images/cafe.png";
+    img.style.display = "block";
+    title.innerText = "Love shows itself quietly";
+    text.innerText = "Not when it’s easy. Not in front of others. But in staying.";
+  }
+
+  if (page === 3) {
+    img.src = "images/couple.png";
+    title.innerText = "In the way I looked at you";
+    text.innerText = "When no one else was watching, my heart already knew.";
+  }
+
+  if (page === 4) {
+    img.src = "images/card.png";
+    title.innerText = "I chose you";
+    text.innerText = "I skipped many paths, because my heart never wandered.";
+  }
+
+  if (page === 5) {
+    img.src = "images/rose.png";
+    title.innerText = "Right person, wrong time";
+    text.innerText =
+      "Family. Circumstances. Life.\nI walked away, not because I stopped loving.";
+  }
+
+  if (page === 6) {
+    img.src = "images/snow.png";
+    title.innerText = "Even if not forever together";
+    text.innerText =
+      "You will be my last two heartbeats until my final breath.";
+  }
+}
+
+function run() {
+  no.style.top = Math.random() * 80 + "%";
+  no.style.left = Math.random() * 80 + "%";
+}
+</script>
+
+</body>
+</html>
