@@ -8,7 +8,7 @@
 body {
   margin: 0;
   height: 100vh;
-  font-family: "Georgia", "Times New Roman", serif;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
   background: #ffd6e7;
   overflow: hidden;
 }
@@ -52,6 +52,12 @@ body {
   100% { transform: scale(1); }
 }
 
+h1 {
+  font-size: 20px;
+  color: #ff4f9a;
+  margin-bottom: 10px;
+}
+
 h2 {
   font-size: 32px;
   color: #e91e63;
@@ -66,7 +72,7 @@ p {
 
 .glow {
   color: #e91e63;
-  font-weight: 600;
+  font-weight: bold;
   animation: glowPulse 2.5s infinite;
 }
 
@@ -79,6 +85,7 @@ p {
 /* Telugu glow */
 .telugu-glow {
   color: #c4006f;
+  font-weight: bold;
   animation: teluguGlow 2.2s infinite;
 }
 
@@ -89,11 +96,12 @@ p {
 }
 
 img {
+  display: block;
+  margin: 30px auto;
   max-width: 100%;
   max-height: 40vh;
   object-fit: contain;
   border-radius: 18px;
-  margin-top: 20px;
 }
 
 button {
@@ -103,6 +111,7 @@ button {
   margin-top: 20px;
   font-size: 16px;
   cursor: pointer;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
 }
 
 .yes {
@@ -151,6 +160,7 @@ button {
 
 <div class="container">
   <div class="card">
+    <h1 id="topline"></h1>
     <h2 id="title"></h2>
     <p id="text"></p>
     <img id="img" style="display:none;">
@@ -166,6 +176,7 @@ let page = 0;
 let cameFromNo = false;
 
 const bg = document.getElementById("bg");
+const topline = document.getElementById("topline");
 const title = document.getElementById("title");
 const text = document.getElementById("text");
 const img = document.getElementById("img");
@@ -192,15 +203,17 @@ function next() {
   page++;
   img.style.display = "none";
   text.innerHTML = "";
+  topline.innerText = "";
 
   if (page === 1) {
     if (!cameFromNo) music.play();
     bg.style.backgroundImage = "url('images/s-love.png')";
+    topline.innerText = "My February message for youuu";
     title.innerText = "From across the oceans…";
 
     typeWriterPlain(
-      "Missing you from overseas isn’t just distance.\n" +
-      "It’s waking up every night with your name in my chest.\n\n",
+      "Keeping my eyes open for you all night is my way of showing love,\n" +
+      "because I can’t feel your presence.\n\n",
       0,
       () => {
         text.innerHTML +=
@@ -214,7 +227,8 @@ function next() {
     img.src = "images/cafe.png";
     img.style.display = "block";
     title.innerText = "Love stays quietly";
-    text.innerText = "Not when it’s easy.\nNot in front of others.\nBut when staying costs everything.";
+    text.innerText =
+      "Not when it’s easy.\nNot in front of others.\nBut when staying costs everything.";
     no.style.display = "none";
   }
 
@@ -222,15 +236,23 @@ function next() {
     img.src = "images/couple.png";
     img.style.display = "block";
     title.innerText = "Silent moments";
-    text.innerText = "In the way I looked at you when no one else was watching.";
+    text.innerText =
+`The way I looked at you when no one else watching me.
+The way I felt you beside me.
+I looked for your name on my phone.
+I looked for you all night.
+
+I stayed up all night just not for talking —
+THAT’S MY WAY OF SHOWING LOVE TO YOUUU,
+as I can’t feel your presence.`;
   }
 
   if (page === 4) {
     img.src = "images/card.png";
     img.style.display = "block";
-    title.innerText = "I chose you";
+    title.innerText = "I choose you";
     text.innerHTML =
-`I skipped many other girls, I chose you.
+`I skipped many other girls, I choose you.
 I have seen my family in you.
 My heart never left you on seen.
 
